@@ -3,15 +3,17 @@ import Footer from "./Footer";
 import Header from "./Header";
 
 interface Props {
-    children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export default function Layout({ children }: Props) {
-    return (
-        <div className="flex flex-col min-h-screen">
-            <Header />
-            <div className="layout w-full flex grow justify-center py-2">{ children }</div>
-            <Footer />
-        </div>
-    )
+  return (
+    <div className="flex flex-col min-h-screen">
+      <Header />
+      <div className="layout w-full flex grow justify-center py-2">
+        {children}
+      </div>
+      <Footer />
+    </div>
+  );
 }

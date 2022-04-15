@@ -1,9 +1,9 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import Hero from '../components/Hero'
-import Posts, { mockData } from '../components/Posts'
-import styles from '../styles/Home.module.css'
+import type { NextPage } from "next";
+import Head from "next/head";
+import Image from "next/image";
+import Hero from "../components/Hero";
+import Posts, { mockData } from "../components/Posts";
+import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
   return (
@@ -18,7 +18,7 @@ const Home: NextPage = () => {
         <Posts data={mockData} />
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
