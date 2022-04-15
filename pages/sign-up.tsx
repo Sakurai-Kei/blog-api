@@ -1,6 +1,8 @@
 import { FormEvent, useState } from "react";
+import { useRouter } from "next/router";
 
 export default function SignUp<NextPage>() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -32,7 +34,10 @@ export default function SignUp<NextPage>() {
     };
 
     const response = await fetch(endpoint, options);
-    const result = await response.json();
+    if (response.status === 200) {
+      const result = await response.json();
+      router.push("/");
+    }
   }
 
   return (
@@ -87,7 +92,7 @@ export default function SignUp<NextPage>() {
             <div className="flex flex-col mb-2">
               <div className=" relative ">
                 <input
-                  type="text"
+                  type="password"
                   onChange={handleChange}
                   className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                   name="password"
@@ -98,7 +103,7 @@ export default function SignUp<NextPage>() {
             <div className="flex flex-col mb-2">
               <div className=" relative ">
                 <input
-                  type="text"
+                  type="password"
                   onChange={handleChange}
                   className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                   name="confirmPassword"
@@ -109,7 +114,7 @@ export default function SignUp<NextPage>() {
             <div className="flex flex-col mb-2">
               <div className=" relative ">
                 <input
-                  type="text"
+                  type="email"
                   onChange={handleChange}
                   className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                   name="email"
@@ -122,7 +127,7 @@ export default function SignUp<NextPage>() {
                 type="submit"
                 className="py-2 px-4  bg-blue-500 hover:bg-blue-600 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
               >
-                Login
+                Register
               </button>
             </div>
           </form>
