@@ -11,6 +11,10 @@ export default function SignUp<NextPage>() {
     confirmPassword: "",
     email: "",
   });
+  const [errors, setErrors] = useState({
+    alreadyExist: false,
+    error: "",
+  });
 
   function handleChange(event: FormEvent<HTMLInputElement>) {
     const value = event.currentTarget.value;
@@ -37,6 +41,27 @@ export default function SignUp<NextPage>() {
     if (response.status === 200) {
       const result = await response.json();
       router.push("/");
+    } else if (response.status === 400) {
+      const result = await response.json();
+      const { error } = result;
+
+      setErrors({
+        ...errors,
+        error: "Password and confirm password does not match",
+      });
+    } else if (response.status === 409) {
+      // Tells user username or email already in use
+      const result = await response.json();
+      const { error, alreadyExist } = result;
+
+      setErrors({
+        alreadyExist,
+        error,
+      });
+    } else {
+      const result = await response.json();
+      // Display error message to user here
+      console.log(result);
     }
   }
 
@@ -56,6 +81,12 @@ export default function SignUp<NextPage>() {
             Sign in
           </a>
         </span>
+        {(errors.alreadyExist || errors.error) && (
+          <div className="self-center mt-2 text-xl text-red-500">
+            {errors.error}
+          </div>
+        )}
+
         <div className="p-6 mt-8">
           <form method="post" action="/api/sign-up" onSubmit={handleSubmit}>
             <div className="flex gap-4 mb-2">
