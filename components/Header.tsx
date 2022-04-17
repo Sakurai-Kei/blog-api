@@ -68,7 +68,7 @@ export default function Header() {
             </a>
           </div>
           <div className="flex flex-col px-2 py-3 -mx-4 md:flex-row">
-            <Link href={"#"}>
+            <Link href={"/log-in"}>
               <a className="px-2 py-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded dark:text-gray-200 hover:bg-blue-500 hover:text-gray-100 md:mx-2">
                 Log In
               </a>

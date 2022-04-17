@@ -27,12 +27,10 @@ export default async function handler(
 
     if (userExist) {
       let alreadyExist = true;
-      res
-        .status(409)
-        .json({
-          error: "Username and/or email is already in use",
-          alreadyExist,
-        });
+      res.status(409).json({
+        error: "Username and/or email is already in use",
+        alreadyExist,
+      });
     }
     if (!userExist && password === confirmPassword) {
       const hashedPassword = await bcrypt.hash(password, 15);
