@@ -1,7 +1,32 @@
+import { NextApiRequest } from "next";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
+import { isPast, parseJSON } from "date-fns";
+import { withIronSessionSsr } from "iron-session/next";
 
-export default function LogIn<NextPage>() {
+export const getServerSideProps = withIronSessionSsr(
+  //@ts-expect-error
+  async function getServerSideProps({ req }) {
+    const user = req.session.user;
+    if (user?.isLoggedIn) {
+      return { props: { user } };
+    } else {
+      return { props: { user: null } };
+    }
+  },
+  {
+    cookieName: "userCookie",
+    password: process.env.COOKIE_SECRET as string,
+    cookieOptions: {
+      secure: process.env.NODE_ENV === "production",
+    },
+  }
+);
+
+export default function LogIn<NextPage>({ user }: any) {
+  console.log(user);
+  const router = useRouter();
   const [formData, setFormData] = useState({
     loginId: "",
     password: "",
@@ -32,11 +57,16 @@ export default function LogIn<NextPage>() {
     if (response.status === 200) {
       const result = await response.json();
       console.log(result.user);
+      router.push("/");
     } else {
       const result = await response.json();
       console.error("Status Code: ", response.status);
       console.log(result.error);
     }
+  }
+
+  if (user) {
+    router.push("/");
   }
 
   return (

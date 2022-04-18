@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import db from "../../lib/mongodb";
 import User, { IUser } from "../../models/user";
 import { IronSessionOptions } from "iron-session";
+import { addDays } from "date-fns";
 
 declare module "iron-session" {
   interface IronSessionData {
@@ -11,6 +12,7 @@ declare module "iron-session" {
       username: string;
       isLoggedIn: boolean;
       isAuthor: boolean;
+      expiry: Date;
     };
   }
 }
@@ -27,6 +29,12 @@ export default withIronSessionApiRoute(handler, sessionOptions);
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { loginId, password } = req.body;
+  const { user } = req.session;
+
+  if (user && user.isLoggedIn) {
+    res.status(200).json({ user });
+    res.end();
+  }
 
   try {
     db.on("error", function () {
@@ -52,6 +60,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         username: userExist.username,
         isLoggedIn: true,
         isAuthor: userExist.isAuthor,
+        expiry: addDays(new Date(), 7),
       };
       req.session.user = user;
       await req.session.save();
