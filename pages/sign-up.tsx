@@ -1,7 +1,17 @@
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/router";
+import { withSessionSsr } from "../lib/withSession";
+import { IronSessionData } from "iron-session";
 
-export default function SignUp<NextPage>() {
+export const getServerSideProps = withSessionSsr(
+  async function getServerSideProps({ req }) {
+    const user = req.session.user || null;
+
+    return { props: { user } };
+  }
+);
+
+export default function SignUp<NextPage>({ user }: IronSessionData) {
   const router = useRouter();
   const [formData, setFormData] = useState({
     firstName: "",
@@ -63,6 +73,10 @@ export default function SignUp<NextPage>() {
       // Display error message to user here
       console.log(result);
     }
+  }
+
+  if (user) {
+    router.push("/");
   }
 
   return (

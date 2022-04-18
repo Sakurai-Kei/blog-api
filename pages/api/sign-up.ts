@@ -10,6 +10,13 @@ export default async function handler(
   const { firstName, lastName, username, password, confirmPassword, email } =
     req.body;
 
+  const { user } = req.session;
+
+  if (user) {
+    res.status(200).json({ user });
+    res.end();
+  }
+
   try {
     db.on("error", function () {
       res.status(502).json({ error: "Unable to connect to database" });

@@ -4,26 +4,7 @@ import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 import { isPast, parseJSON } from "date-fns";
 import { withSessionSsr } from "../lib/withSession";
-
-// export const getServerSideProps = withIronSessionSsr(
-//   //@ts-expect-error
-//   async function getServerSideProps({ req }) {
-//     const user = req.session.user;
-//     console.log(user)
-//     if (user?.isLoggedIn) {
-//       return { props: { user } };
-//     } else {
-//       return { props: { user: null } };
-//     }
-//   },
-//   {
-//     cookieName: "userCookie",
-//     password: process.env.COOKIE_SECRET as string,
-//     cookieOptions: {
-//       secure: process.env.NODE_ENV === "production",
-//     },
-//   }
-// );
+import { IronSessionData } from "iron-session";
 
 export const getServerSideProps = withSessionSsr(
   async function getServerSideProps({ req }) {
@@ -33,7 +14,7 @@ export const getServerSideProps = withSessionSsr(
   }
 );
 
-export default function LogIn<NextPage>({ user }: any) {
+export default function LogIn<NextPage>({ user }: IronSessionData) {
   const router = useRouter();
   const [formData, setFormData] = useState({
     loginId: "",

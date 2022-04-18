@@ -10,7 +10,6 @@ declare module "iron-session" {
   interface IronSessionData {
     user?: {
       username: string;
-      isLoggedIn: boolean;
       isAuthor: boolean;
     };
   }

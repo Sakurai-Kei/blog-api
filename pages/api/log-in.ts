@@ -13,7 +13,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { loginId, password } = req.body;
   const { user } = req.session;
 
-  if (user && user.isLoggedIn) {
+  if (user) {
     res.status(200).json({ user });
     res.end();
   }
@@ -40,7 +40,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       }
       const user = {
         username: userExist.username,
-        isLoggedIn: true,
         isAuthor: userExist.isAuthor,
       };
       req.session.user = user;
