@@ -3,29 +3,37 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 import { isPast, parseJSON } from "date-fns";
-import { withIronSessionSsr } from "iron-session/next";
+import { withSessionSsr } from "../lib/withSession";
 
-export const getServerSideProps = withIronSessionSsr(
-  //@ts-expect-error
+// export const getServerSideProps = withIronSessionSsr(
+//   //@ts-expect-error
+//   async function getServerSideProps({ req }) {
+//     const user = req.session.user;
+//     console.log(user)
+//     if (user?.isLoggedIn) {
+//       return { props: { user } };
+//     } else {
+//       return { props: { user: null } };
+//     }
+//   },
+//   {
+//     cookieName: "userCookie",
+//     password: process.env.COOKIE_SECRET as string,
+//     cookieOptions: {
+//       secure: process.env.NODE_ENV === "production",
+//     },
+//   }
+// );
+
+export const getServerSideProps = withSessionSsr(
   async function getServerSideProps({ req }) {
-    const user = req.session.user;
-    if (user?.isLoggedIn) {
-      return { props: { user } };
-    } else {
-      return { props: { user: null } };
-    }
-  },
-  {
-    cookieName: "userCookie",
-    password: process.env.COOKIE_SECRET as string,
-    cookieOptions: {
-      secure: process.env.NODE_ENV === "production",
-    },
+    const user = req.session.user || null;
+
+    return { props: { user } };
   }
 );
 
 export default function LogIn<NextPage>({ user }: any) {
-  console.log(user);
   const router = useRouter();
   const [formData, setFormData] = useState({
     loginId: "",
@@ -56,7 +64,6 @@ export default function LogIn<NextPage>({ user }: any) {
     const response = await fetch(endpoint, options);
     if (response.status === 200) {
       const result = await response.json();
-      console.log(result.user);
       router.push("/");
     } else {
       const result = await response.json();

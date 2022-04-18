@@ -1,3 +1,4 @@
+import { IronSessionData } from "iron-session";
 import Link from "next/link";
 import { useState } from "react";
 

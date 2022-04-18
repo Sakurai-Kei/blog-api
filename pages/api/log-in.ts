@@ -5,27 +5,9 @@ import db from "../../lib/mongodb";
 import User, { IUser } from "../../models/user";
 import { IronSessionOptions } from "iron-session";
 import { addDays } from "date-fns";
+import { withSessionRoute } from "../../lib/withSession";
 
-declare module "iron-session" {
-  interface IronSessionData {
-    user?: {
-      username: string;
-      isLoggedIn: boolean;
-      isAuthor: boolean;
-      expiry: Date;
-    };
-  }
-}
-
-const sessionOptions: IronSessionOptions = {
-  cookieName: "userCookie",
-  password: process.env.COOKIE_SECRET as string,
-  cookieOptions: {
-    secure: process.env.NODE_ENV === "production",
-  },
-};
-
-export default withIronSessionApiRoute(handler, sessionOptions);
+export default withSessionRoute(handler);
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { loginId, password } = req.body;
@@ -60,7 +42,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         username: userExist.username,
         isLoggedIn: true,
         isAuthor: userExist.isAuthor,
-        expiry: addDays(new Date(), 7),
       };
       req.session.user = user;
       await req.session.save();
