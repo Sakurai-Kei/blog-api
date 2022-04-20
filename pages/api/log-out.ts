@@ -6,5 +6,5 @@ export default withIronSessionApiRoute(handler, sessionOptions);
 
 function handler(req: NextApiRequest, res: NextApiResponse) {
   req.session.destroy();
-  res.redirect("/log-in");
+  res.redirect("/");
 }

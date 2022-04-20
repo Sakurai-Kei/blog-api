@@ -1,21 +1,19 @@
 import { NextApiRequest } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { isPast, parseJSON } from "date-fns";
 import { withSessionSsr } from "../lib/withSession";
 import { IronSessionData } from "iron-session";
+import useUser from "../lib/useUser";
 
-export const getServerSideProps = withSessionSsr(
-  async function getServerSideProps({ req }) {
-    const user = req.session.user || null;
-
-    return { props: { user } };
-  }
-);
-
-export default function LogIn<NextPage>({ user }: IronSessionData) {
+export default function LogIn<NextPage>() {
   const router = useRouter();
+  const user = useUser({
+    redirectTo: "/",
+    redirectIfFound: true,
+  });
+
   const [formData, setFormData] = useState({
     loginId: "",
     password: "",
@@ -44,7 +42,7 @@ export default function LogIn<NextPage>({ user }: IronSessionData) {
 
     const response = await fetch(endpoint, options);
     if (response.status === 200) {
-      const result = await response.json();
+      // const result = await response.json();
       router.push("/");
     } else {
       const result = await response.json();
@@ -53,9 +51,9 @@ export default function LogIn<NextPage>({ user }: IronSessionData) {
     }
   }
 
-  if (user) {
-    router.push("/");
-  }
+  useEffect(() => {
+    router.prefetch("/");
+  });
 
   return (
     <>

@@ -14,8 +14,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { user } = req.session;
 
   if (user) {
-    res.status(200).json({ user });
-    res.end();
+    res.status(200).redirect("/");
   }
 
   try {
@@ -45,7 +44,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       req.session.user = user;
       await req.session.save();
 
-      res.status(200).json({ user });
+      res.status(200).end();
     }
   } catch (error) {}
 }

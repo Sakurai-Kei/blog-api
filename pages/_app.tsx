@@ -13,6 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <SWRConfig
       value={{
         fetcher: fetchJson,
+        revalidateOnMount: true,
         onError: (err) => {
           console.error(err);
         },
