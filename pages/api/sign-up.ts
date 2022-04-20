@@ -7,6 +7,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  if (!req.body.username || !req.body.password || !req.body.email) {
+    res.redirect("/sign-up");
+  }
+
   const { firstName, lastName, username, password, confirmPassword, email } =
     req.body;
 

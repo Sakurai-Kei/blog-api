@@ -1,14 +1,9 @@
-import { IronSessionData } from "iron-session";
-import Router, { useRouter } from "next/router";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import fetchJson from "../lib/fetchJson";
 import useUser from "../lib/useUser";
-import { withSessionSsr } from "../lib/withSession";
 
 export default function Header() {
   const user = useUser();
-  const router = useRouter();
   const [show, setShow] = useState("hidden");
 
   function showMenu() {

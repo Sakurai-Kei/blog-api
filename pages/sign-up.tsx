@@ -1,7 +1,5 @@
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/router";
-import { withSessionSsr } from "../lib/withSession";
-import { IronSessionData } from "iron-session";
 import useUser from "../lib/useUser";
 
 export default function SignUp<NextPage>() {

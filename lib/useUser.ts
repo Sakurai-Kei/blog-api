@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import Router from "next/router";
 import useSWR from "swr";
-import { IronSessionData } from "iron-session";
 
 export default function useUser({
   redirectTo = "",

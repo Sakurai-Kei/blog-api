@@ -1,15 +1,16 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { withIronSessionApiRoute } from "iron-session/next";
 import bcrypt from "bcryptjs";
 import db from "../../lib/mongodb";
 import User, { IUser } from "../../models/user";
-import { IronSessionOptions } from "iron-session";
-import { addDays } from "date-fns";
 import { withSessionRoute } from "../../lib/withSession";
 
 export default withSessionRoute(handler);
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
+  if (!req.body.loginId || !req.body.password) {
+    res.redirect("/log-in");
+  }
+
   const { loginId, password } = req.body;
   const { user } = req.session;
 

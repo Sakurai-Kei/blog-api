@@ -1,10 +1,6 @@
-import { NextApiRequest } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormEvent, useEffect, useState } from "react";
-import { isPast, parseJSON } from "date-fns";
-import { withSessionSsr } from "../lib/withSession";
-import { IronSessionData } from "iron-session";
 import useUser from "../lib/useUser";
 
 export default function LogIn<NextPage>() {
@@ -17,6 +13,10 @@ export default function LogIn<NextPage>() {
   const [formData, setFormData] = useState({
     loginId: "",
     password: "",
+  });
+
+  const [errors, setErrors] = useState({
+    error: "",
   });
 
   function handleChange(event: FormEvent<HTMLInputElement>) {
@@ -42,12 +42,12 @@ export default function LogIn<NextPage>() {
 
     const response = await fetch(endpoint, options);
     if (response.status === 200) {
-      // const result = await response.json();
       router.push("/");
     } else {
       const result = await response.json();
-      console.error("Status Code: ", response.status);
-      console.log(result.error);
+      setErrors({
+        error: `Status Code: ${response.status}(${result.error})`,
+      });
     }
   }
 
@@ -68,6 +68,19 @@ export default function LogIn<NextPage>() {
             autoComplete="off"
             onSubmit={handleSubmit}
           >
+            {errors.error && (
+              <div className="w-full text-white bg-red-500">
+                <div className="container flex items-center justify-between mb-4 px-6 py-4 mx-auto">
+                  <div className="flex">
+                    <svg viewBox="0 0 40 40" className="w-6 h-6 fill-current">
+                      <path d="M20 3.36667C10.8167 3.36667 3.3667 10.8167 3.3667 20C3.3667 29.1833 10.8167 36.6333 20 36.6333C29.1834 36.6333 36.6334 29.1833 36.6334 20C36.6334 10.8167 29.1834 3.36667 20 3.36667ZM19.1334 33.3333V22.9H13.3334L21.6667 6.66667V17.1H27.25L19.1334 33.3333Z"></path>
+                    </svg>
+
+                    <p className="mx-3">{errors.error}</p>
+                  </div>
+                </div>
+              </div>
+            )}
             <div className="flex flex-col mb-2">
               <div className="flex relative ">
                 <span className="rounded-l-md inline-flex  items-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
