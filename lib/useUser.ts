@@ -7,7 +7,7 @@ export default function useUser({
   redirectTo = "",
   redirectIfFound = false,
 } = {}) {
-  const { data: user } = useSWR<IronSessionData>("/api/user");
+  const { data: user } = useSWR("/api/user");
 
   useEffect(() => {
     if (!redirectTo || !user) return;

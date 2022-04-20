@@ -1,6 +1,8 @@
 import { IronSessionData } from "iron-session";
+import Router from "next/router";
 import Link from "next/link";
-import { useState } from "react";
+import React, { useState } from "react";
+import fetchJson from "../lib/fetchJson";
 import useUser from "../lib/useUser";
 import { withSessionSsr } from "../lib/withSession";
 
@@ -8,14 +10,17 @@ export default function Header() {
   const user = useUser();
   const [show, setShow] = useState("hidden");
 
-  console.log(user);
-
   function showMenu() {
     if (show === "hidden") {
       setShow("");
     } else {
       setShow("hidden");
     }
+  }
+
+  async function logOut(event: React.MouseEvent) {
+    event.preventDefault();
+    await fetchJson("/api/log-out", { method: "POST" });
   }
 
   return (
@@ -74,16 +79,34 @@ export default function Header() {
             </a>
           </div>
           <div className="flex flex-col px-2 py-3 -mx-4 md:flex-row">
-            <Link href={"/log-in"}>
-              <a className="px-2 py-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded dark:text-gray-200 hover:bg-blue-500 hover:text-gray-100 md:mx-2">
-                Log In
-              </a>
-            </Link>
-            <Link href={"/sign-up"}>
-              <a className="px-2 py-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded dark:text-gray-200 hover:bg-blue-500 hover:text-gray-100 md:mx-2">
-                Sign Up
-              </a>
-            </Link>
+            {!user && (
+              <>
+                <Link href={"/log-in"}>
+                  <a className="px-2 py-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded dark:text-gray-200 hover:bg-blue-500 hover:text-gray-100 md:mx-2">
+                    Log In
+                  </a>
+                </Link>
+                <Link href={"/sign-up"}>
+                  <a className="px-2 py-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded dark:text-gray-200 hover:bg-blue-500 hover:text-gray-100 md:mx-2">
+                    Sign Up
+                  </a>
+                </Link>
+              </>
+            )}
+            {user && (
+              <>
+                <Link href={`/${user.username}`}>
+                  <a className="px-2 py-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded dark:text-gray-200 hover:bg-blue-500 hover:text-gray-100 md:mx-2">
+                    {user.username}
+                  </a>
+                </Link>
+                <Link href={"/api/log-out"}>
+                  <a className="px-2 py-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded dark:text-gray-200 hover:bg-blue-500 hover:text-gray-100 md:mx-2">
+                    Log Out
+                  </a>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>
