@@ -1,9 +1,14 @@
 import { IronSessionData } from "iron-session";
 import Link from "next/link";
 import { useState } from "react";
+import useUser from "../lib/useUser";
+import { withSessionSsr } from "../lib/withSession";
 
 export default function Header() {
+  const user = useUser();
   const [show, setShow] = useState("hidden");
+
+  console.log(user);
 
   function showMenu() {
     if (show === "hidden") {
@@ -46,7 +51,7 @@ export default function Header() {
 
         {/* !-- Mobile Menu open: "block", Menu closed: "hidden" -- */}
         <div
-          className={`md:w-full md:flex md:items-center md:justify-between ${show}`}
+          className={`${show} md:w-full md:flex md:items-center md:justify-between`}
         >
           <div className="flex flex-col px-2 py-3 -mx-4 md:flex-row md:mx-0 md:py-0">
             <a

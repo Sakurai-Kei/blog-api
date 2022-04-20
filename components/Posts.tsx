@@ -6,8 +6,8 @@ export interface Prop {
   comments: string;
 }
 
-interface PostArg {
-  data: Prop[];
+interface PostsProp {
+  blogPosts: Prop[];
 }
 
 export const mockData: Prop[] = [
@@ -34,13 +34,16 @@ export const mockData: Prop[] = [
   },
 ];
 
-export default function Posts(props: PostArg) {
-  const { data } = props;
+export default function Posts(props: PostsProp) {
+  const { blogPosts } = props;
   return (
     <div className="flex flex-col gap-2">
-      {data.map((post: Prop) => {
+      {blogPosts.map((post: Prop) => {
         return (
-          <div key={"one"} className="flex flex-col px-2 py-2 flex-wrap w-full">
+          <div
+            key={post.title}
+            className="flex flex-col px-2 py-2 flex-wrap w-full"
+          >
             <div>{post.title}</div>
             <div>{post.authors}</div>
             <div>{post.date}</div>

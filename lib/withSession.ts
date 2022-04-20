@@ -15,7 +15,7 @@ declare module "iron-session" {
   }
 }
 
-const sessionOptions: IronSessionOptions = {
+export const sessionOptions: IronSessionOptions = {
   cookieName: "userCookie",
   password: process.env.COOKIE_SECRET as string,
   cookieOptions: {

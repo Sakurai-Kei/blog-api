@@ -15,7 +15,7 @@ const Home: NextPage = () => {
       </Head>
       <div>
         <Hero />
-        <Posts data={mockData} />
+        <Posts blogPosts={mockData} />
       </div>
     </>
   );
