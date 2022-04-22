@@ -4,9 +4,9 @@ import { IUser } from "./user";
 
 export interface IPost {
   title: string;
-  date: Date;
+  date: Date | string;
   text: string;
-  authors: IUser[];
-  comments: IComment;
-  _id: Schema.Types.ObjectId;
+  authors: IUser | string;
+  comments: IComment | string;
+  _id: Schema.Types.ObjectId | string;
 }

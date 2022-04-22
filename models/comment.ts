@@ -3,6 +3,6 @@ import { IUser } from "./user";
 
 export interface IComment {
   text: string;
-  date: Date;
-  author: IUser;
+  date: Date | string;
+  author: IUser | string;
 }

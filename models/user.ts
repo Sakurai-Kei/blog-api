@@ -12,25 +12,36 @@ export interface IUser {
   posts?: IPost[];
   comments?: IComment[];
   _id: Schema.Types.ObjectId;
+  fullName?: string;
+  url: string;
 }
 
-const userSchema = new Schema<IUser>({
-  firstName: String,
-  lastName: String,
-  username: {
-    type: String,
-    required: [true, "Username is required"],
-    maxLength: [20, "Username is too long. Maximum is 20 characters long"],
+const opts = {
+  toJSON: {
+    virtuals: true,
   },
-  password: {
-    type: String,
-    required: [true, "Password is required"],
+};
+
+const userSchema = new Schema<IUser>(
+  {
+    firstName: String,
+    lastName: String,
+    username: {
+      type: String,
+      required: [true, "Username is required"],
+      maxLength: [20, "Username is too long. Maximum is 20 characters long"],
+    },
+    password: {
+      type: String,
+      required: [true, "Password is required"],
+    },
+    email: { type: String, required: true },
+    isAuthor: { type: Boolean, required: true },
+    posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
+    comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
   },
-  email: { type: String, required: true },
-  isAuthor: { type: Boolean, required: true },
-  posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
-  comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
-});
+  opts
+);
 
 userSchema.virtual("fullName").get(function (this: IUser) {
   return this.firstName + " " + this.lastName;
