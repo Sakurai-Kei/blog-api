@@ -14,7 +14,7 @@ interface PostsProp {
 export const mockData: IPost[] = [
   {
     title: "Post 1",
-    date: "10 January, 2022",
+    date: new Date().toString(),
     text: "Content of post 1",
     authors: "mock Author",
     comments: "mock Comment 1",
@@ -22,7 +22,7 @@ export const mockData: IPost[] = [
   },
   {
     title: "Post 2",
-    date: "11 January, 2022",
+    date: new Date().toString(),
     text: "Content of post 2",
     authors: "mock Author",
     comments: "mock Comment 1",
@@ -30,7 +30,7 @@ export const mockData: IPost[] = [
   },
   {
     title: "Post 3",
-    date: "12 January, 2022",
+    date: new Date().toString(),
     text: "Content of post 3",
     authors: "mock Author",
     comments: "mock Comment 1",
@@ -49,7 +49,9 @@ export default function Posts(props: PostsProp) {
             className="flex flex-col px-2 py-2 flex-wrap w-full"
           >
             <div>{post.title}</div>
+            {/* @ts-expect-error */}
             <div>{post.authors}</div>
+            {/* @ts-expect-error */}
             <div>{post.date}</div>
             <div>{post.text}</div>
           </div>

@@ -57,6 +57,7 @@ export default function User() {
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-light text-gray-600 dark:text-gray-400">
+                      {/* @ts-expect-error */}
                       {post.date}
                     </span>
                   </div>

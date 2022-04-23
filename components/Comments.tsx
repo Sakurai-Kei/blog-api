@@ -7,17 +7,17 @@ interface Props {
 export const mockComments: IComment[] = [
   {
     text: "I like this article",
-    date: "random date",
+    date: new Date().toString(),
     author: "user",
   },
   {
     text: "Good job",
-    date: "random date",
+    date: new Date().toString(),
     author: "user",
   },
   {
     text: "Best",
-    date: "random date",
+    date: new Date().toString(),
     author: "user",
   },
 ];
@@ -34,9 +34,13 @@ export default function Comments(props: Props) {
             className="flex gap-2 justify-between w-full px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800"
           >
             <div className="mt-2">
+              {/* @ts-expect-error */}
+              <h3>{comment.author}</h3>
               <p className="mt-2 text-gray-600 dark:text-gray-300">
                 {comment.text}
               </p>
+              {/* @ts-expect-error */}
+              <p>{comment.date}</p>
             </div>
             <a className="text-blue-600 dark:text-blue-400 hover:underline mt-4">
               Post link
