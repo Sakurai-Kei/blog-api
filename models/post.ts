@@ -11,13 +11,22 @@ export interface IPost {
   _id: mongoose.Schema.Types.ObjectId;
 }
 
-const postSchema = new mongoose.Schema<IPost>({
-  title: { type: String, required: [true, "Title is required"] },
-  date: { type: Date, required: [true, "Date is required"] },
-  text: { type: String, required: [true, "Post must have content"] },
-  authors: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
-});
+const opts = {
+  toJSON: {
+    virtuals: true,
+  },
+};
+
+const postSchema = new mongoose.Schema<IPost>(
+  {
+    title: { type: String, required: [true, "Title is required"] },
+    date: { type: Date, required: [true, "Date is required"] },
+    text: { type: String, required: [true, "Post must have content"] },
+    authors: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+  },
+  opts
+);
 
 postSchema.virtual("url").get(function (this: IPost) {
   return "/posts/" + this._id;

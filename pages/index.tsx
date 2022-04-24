@@ -10,7 +10,6 @@ const Home: NextPage = () => {
   const user = useUser();
   const { data: postList, error: postListError } =
     useSWR<IPost[]>("/api/posts");
-  console.log(postList);
 
   return (
     <>
