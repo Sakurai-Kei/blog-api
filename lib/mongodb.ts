@@ -1,7 +1,9 @@
-import { connect, connection } from "mongoose";
+import mongoose from "mongoose";
 
-const mongoDB = process.env.MONGODB_URI as string;
-connect(mongoDB);
-const db = connection;
+async function dbConnect() {
+  const mongoDB = process.env.MONGODB_URI as string;
+  const db = await mongoose.connect(mongoDB);
+  return db;
+}
 
-export default db;
+export default dbConnect;

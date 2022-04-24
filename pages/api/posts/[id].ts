@@ -1,21 +1,22 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import { withIronSessionApiRoute } from "iron-session/next";
 import { sessionOptions } from "../../../lib/withSession";
-import User, { IUser } from "../../../models/user";
+import { NextApiRequest, NextApiResponse } from "next";
+import { IPost } from "../../../models/post";
+import Post from "../../../models/post";
 import dbConnect from "../../../lib/mongodb";
 
 export default withIronSessionApiRoute(handler, sessionOptions);
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const username = req.query.id;
+  const postId = req.query.id;
   await dbConnect();
   try {
-    const user: IUser = await User.findOne({ username }).exec();
-    if (!user) {
+    const post: IPost = await Post.findOne({ postId }).exec();
+    if (!post) {
       res.status(404).json(false);
     } else {
       //@ts-expect-error Mongoose method to return document with virtual properties
-      res.status(200).json(user.toObject({ virtuals: true }));
+      res.status(200).json(post.toObject({ virtuals: true }));
     }
   } catch (error) {}
 }

@@ -1,12 +1,14 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import bcrypt from "bcryptjs";
-import db from "../../lib/mongodb";
 import User, { IUser } from "../../models/user";
 import { withSessionRoute } from "../../lib/withSession";
+import db from "../../lib/mongodb";
+import dbConnect from "../../lib/mongodb";
 
 export default withSessionRoute(handler);
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
+  await dbConnect();
   if (!req.body.loginId || !req.body.password) {
     res.redirect("/log-in");
   }
@@ -19,10 +21,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   try {
-    db.on("error", function () {
-      res.status(502).json({ error: "Unable to connect to database" });
-    });
-
     const userExist: IUser | null = await User.findOne({
       $or: [{ username: loginId }, { email: loginId }],
     }).exec();

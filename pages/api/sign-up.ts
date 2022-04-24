@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import User, { IUser } from "../../models/user";
-import db from "../../lib/mongodb";
 import bcrypt from "bcryptjs";
+import db from "../../lib/mongodb";
 
 export default async function handler(
   req: NextApiRequest,
@@ -22,9 +22,7 @@ export default async function handler(
   }
 
   try {
-    db.on("error", function () {
-      res.status(502).json({ error: "Unable to connect to database" });
-    });
+    db;
 
     const userExist: IUser = await User.findOne({
       $or: [{ username }, { email }],

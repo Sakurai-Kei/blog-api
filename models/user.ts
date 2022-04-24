@@ -1,4 +1,4 @@
-import { Schema, model, models } from "mongoose";
+import mongoose from "mongoose";
 import { IPost } from "./post";
 import { IComment } from "./comment";
 
@@ -11,7 +11,7 @@ export interface IUser {
   email: string;
   posts?: IPost[];
   comments?: IComment[];
-  _id: Schema.Types.ObjectId;
+  _id: mongoose.Schema.Types.ObjectId;
   fullName?: string;
   url: string;
 }
@@ -22,7 +22,7 @@ const opts = {
   },
 };
 
-const userSchema = new Schema<IUser>(
+const userSchema = new mongoose.Schema<IUser>(
   {
     firstName: String,
     lastName: String,
@@ -37,8 +37,8 @@ const userSchema = new Schema<IUser>(
     },
     email: { type: String, required: true },
     isAuthor: { type: Boolean, required: true },
-    posts: [{ type: Schema.Types.ObjectId, ref: "Post" }],
-    comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
+    posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
   },
   opts
 );
@@ -51,6 +51,6 @@ userSchema.virtual("url").get(function (this: IUser) {
   return "/user/" + this.username;
 });
 
-const User = models.User || model("User", userSchema);
+const User = mongoose.models.User || mongoose.model("User", userSchema);
 
 export default User;

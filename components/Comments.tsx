@@ -7,17 +7,17 @@ interface Props {
 export const mockComments: IComment[] = [
   {
     text: "I like this article",
-    date: new Date().toString(),
+    date: new Date().getDate().toString(),
     author: "user",
   },
   {
     text: "Good job",
-    date: new Date().toString(),
+    date: new Date().getDate().toString(),
     author: "user",
   },
   {
     text: "Best",
-    date: new Date().toString(),
+    date: new Date().getDate().toString(),
     author: "user",
   },
 ];

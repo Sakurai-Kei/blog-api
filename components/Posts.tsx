@@ -1,62 +1,60 @@
-// export interface IPost {
-//   title: string;
-//   date: string;
-//   text: string;
-//   authors: string;
-//   comments: string;
-// }
+import Link from "next/link";
 import { IPost } from "../models/post";
 
 interface PostsProp {
-  blogPosts: IPost[];
+  blogPosts: IPost[] | undefined;
 }
-
-export const mockData: IPost[] = [
-  {
-    title: "Post 1",
-    date: new Date().toString(),
-    text: "Content of post 1",
-    authors: "mock Author",
-    comments: "mock Comment 1",
-    _id: "1",
-  },
-  {
-    title: "Post 2",
-    date: new Date().toString(),
-    text: "Content of post 2",
-    authors: "mock Author",
-    comments: "mock Comment 1",
-    _id: "2",
-  },
-  {
-    title: "Post 3",
-    date: new Date().toString(),
-    text: "Content of post 3",
-    authors: "mock Author",
-    comments: "mock Comment 1",
-    _id: "3",
-  },
-];
 
 export default function Posts(props: PostsProp) {
   const { blogPosts } = props;
+  if (!blogPosts) {
+    return <div>Loading Posts</div>;
+  }
   return (
-    <div className="flex flex-col gap-2">
-      {blogPosts.map((post: IPost) => {
-        return (
-          <div
-            key={post.title}
-            className="flex flex-col px-2 py-2 flex-wrap w-full"
-          >
-            <div>{post.title}</div>
-            {/* @ts-expect-error */}
-            <div>{post.authors}</div>
-            {/* @ts-expect-error */}
-            <div>{post.date}</div>
-            <div>{post.text}</div>
-          </div>
-        );
-      })}
+    <div className="flex flex-col flex-1 gap-2">
+      {blogPosts!.length !== 0 &&
+        blogPosts!.map((post) => {
+          return (
+            <div
+              key={post._id.toString()}
+              className="w-full px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800"
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-light text-gray-600 dark:text-gray-400">
+                  {/* @ts-expect-error */}
+                  {post.date}
+                </span>
+              </div>
+
+              <div className="mt-2">
+                <a
+                  href="#"
+                  className="text-2xl font-bold text-gray-700 dark:text-white hover:text-gray-600 dark:hover:text-gray-200 hover:underline"
+                >
+                  {post.title}
+                </a>
+                <p className="mt-2 text-gray-600 dark:text-gray-300">
+                  {post.text}
+                </p>
+              </div>
+
+              <div className="flex items-center justify-between mt-4">
+                <Link href={"/posts/" + post._id}>
+                  <a className="text-blue-600 dark:text-blue-400 hover:underline">
+                    Read more
+                  </a>
+                </Link>
+
+                <div className="flex items-center">
+                  <a className="font-bold text-gray-700 cursor-pointer dark:text-gray-200">
+                    {post.authors.username}
+                  </a>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      {/* {data.posts!.length === 0 && <div>No post history</div>} */}
     </div>
   );
 }
