@@ -3,25 +3,31 @@ import useSWR from "swr";
 import useUser from "../../lib/useUser";
 import { IUser } from "../../models/user";
 import Posts from "../../components/Posts";
-import Comments, { mockComments } from "../../components/Comments";
+import Comments from "../../components/Comments";
 import { IPost } from "../../models/post";
+import { IComment } from "../../models/comment";
+
+interface ProfilePageData {
+  user: IUser;
+  postList: IPost[];
+  commentList: IComment[];
+}
 
 export default function User() {
   const router = useRouter();
   const userSession = useUser();
-  const { data: user, error: userError } = useSWR<IUser>(
+  const { data, error } = useSWR<ProfilePageData>(
     router.query.id ? `/api/user/${router.query.id}` : null
   );
-  const { data: postList, error: postListError } =
-    useSWR<IPost[]>("/api/posts");
+  console.log(data);
 
   const rowClass =
     "flex flex-col sm:flex-row justify-between items-center sm:items-start py-3 border-t border-gray-300 last:border-none";
   const leftClass = "w-full sm:w-1/3 font-medium text-center sm:text-left";
   const rightClass = "flex-1 text-center sm:text-left";
 
-  if (userError) return <div>Failed to load user</div>;
-  if (!user) {
+  if (error) return <div>Failed to load user</div>;
+  if (!data) {
     return <div>Loading</div>;
   }
 
@@ -33,30 +39,33 @@ export default function User() {
           <div className="mt-4">
             <div className={rowClass}>
               <span className={leftClass}>Full name</span>
-              <span className={rightClass}>{user.fullName}</span>
+              <span className={rightClass}>{data.user.fullName}</span>
             </div>
             <div className={rowClass}>
               <span className={leftClass}>Email Address</span>
-              <span className={rightClass}>{user.email}</span>
+              <span className={rightClass}>{data.user.email}</span>
             </div>
             <div className={rowClass}>
               <span className={leftClass}>Username</span>
-              <span className={rightClass}>{user.username}</span>
+              <span className={rightClass}>{data.user.username}</span>
             </div>
             <div className={rowClass}>
               <span className={leftClass}>Author</span>
-              <span className={rightClass}>{user.isAuthor.toString()}</span>
+              <span className={rightClass}>
+                {data.user.isAuthor.toString()}
+              </span>
             </div>
           </div>
         </div>
       </div>
       <div className="flex flex-col flex-1 gap-4">
         <div className="flex flex-col flex-1 gap-2">
-          <Posts blogPosts={postList} />
+          {data.postList && <Posts blogPosts={data.postList} />}
         </div>
         <div className="flex flex-col flex-1 gap-2">
-          {mockComments.length !== 0 && <Comments comments={mockComments} />}
-          {/* {data.comments!.length === 0 && <div>No comment history</div>} */}
+          {data.commentList && (
+            <Comments comments={data.commentList as IComment[]} />
+          )}
         </div>
       </div>
     </div>

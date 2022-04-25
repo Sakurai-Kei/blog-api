@@ -27,12 +27,11 @@ export default function Posts(props: PostsProp) {
               </div>
 
               <div className="mt-2">
-                <a
-                  href="#"
-                  className="text-2xl font-bold text-gray-700 dark:text-white hover:text-gray-600 dark:hover:text-gray-200 hover:underline"
-                >
-                  {post.title}
-                </a>
+                <Link href={"/posts/" + post._id}>
+                  <a className="text-2xl font-bold text-gray-700 dark:text-white hover:text-gray-600 dark:hover:text-gray-200 hover:underline">
+                    {post.title}
+                  </a>
+                </Link>
                 <p className="mt-2 text-gray-600 dark:text-gray-300">
                   {post.text}
                 </p>

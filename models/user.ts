@@ -20,6 +20,9 @@ const opts = {
   toJSON: {
     virtuals: true,
   },
+  toObject: {
+    virtuals: true,
+  },
 };
 
 const userSchema = new mongoose.Schema<IUser>(

@@ -3,6 +3,8 @@ import { withIronSessionApiRoute } from "iron-session/next";
 import { sessionOptions } from "../../../lib/withSession";
 import User, { IUser } from "../../../models/user";
 import dbConnect from "../../../lib/mongodb";
+import Post, { IPost } from "../../../models/post";
+import Comment from "../../../models/comment";
 
 export default withIronSessionApiRoute(handler, sessionOptions);
 
@@ -14,8 +16,18 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (!user) {
       res.status(404).json(false);
     } else {
-      //@ts-expect-error Mongoose method to return document with virtual properties
-      res.status(200).json(user.toObject({ virtuals: true }));
+      const postList = await Post.find({ authors: user._id })
+        .populate({ path: "authors" })
+        .exec();
+      const commentList = await Comment.find({ author: user._id })
+        .populate({ path: "author" })
+        .exec();
+      const data = {
+        user,
+        postList,
+        commentList,
+      };
+      res.status(200).json(data);
     }
   } catch (error) {}
 }

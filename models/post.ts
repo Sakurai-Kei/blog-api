@@ -15,6 +15,9 @@ const opts = {
   toJSON: {
     virtuals: true,
   },
+  toObject: {
+    virtuals: true,
+  },
 };
 
 const postSchema = new mongoose.Schema<IPost>(

@@ -4,38 +4,23 @@ interface Props {
   comments: IComment[];
 }
 
-export const mockComments: IComment[] = [
-  {
-    text: "I like this article",
-    date: new Date().getDate().toString(),
-    author: "user",
-  },
-  {
-    text: "Good job",
-    date: new Date().getDate().toString(),
-    author: "user",
-  },
-  {
-    text: "Best",
-    date: new Date().getDate().toString(),
-    author: "user",
-  },
-];
-
 export default function Comments(props: Props) {
   const { comments } = props;
+
+  if (!comments) {
+    return <div>Loading Comments</div>;
+  }
 
   return (
     <>
       {comments.map((comment) => {
         return (
           <div
-            key={comment.text}
+            key={comment._id}
             className="flex gap-2 justify-between w-full px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800"
           >
             <div className="mt-2">
-              {/* @ts-expect-error */}
-              <h3>{comment.author}</h3>
+              <h3>{comment.author.username}</h3>
               <p className="mt-2 text-gray-600 dark:text-gray-300">
                 {comment.text}
               </p>
