@@ -21,6 +21,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         .exec();
       const commentList = await Comment.find({ author: user._id })
         .populate({ path: "author" })
+        .populate({ path: "posts" })
         .exec();
       const data = {
         user,

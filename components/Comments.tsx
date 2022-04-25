@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { IComment } from "../models/comment";
 
 interface Props {
@@ -27,9 +28,11 @@ export default function Comments(props: Props) {
               {/* @ts-expect-error */}
               <p>{comment.date}</p>
             </div>
-            <a className="text-blue-600 dark:text-blue-400 hover:underline mt-4">
-              Post link
-            </a>
+            <Link href={"/posts/" + comment.posts._id}>
+              <a className="text-blue-600 dark:text-blue-400 hover:underline mt-4">
+                Post link
+              </a>
+            </Link>
           </div>
         );
       })}

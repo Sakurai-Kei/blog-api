@@ -8,28 +8,23 @@ import { IPost } from "../../models/post";
 export default function Post<NextPage>() {
   const router = useRouter();
   const user = useUser();
-  const { data: post, error: postError } = useSWR<IPost>(
+  const { data, error } = useSWR(
     router.query.id ? `/api/posts/${router.query.id}` : null
   );
 
-  const { data: commentList, error: commentListError } = useSWR<IComment[]>(
-    router.query.id ? `/api/comments/${router.query.id}` : null
-  );
-
-  if (postError) return <div>Failed to load post</div>;
-  if (!post) {
+  if (error) return <div>Failed to load post</div>;
+  if (!data) {
     return <div>Loading</div>;
   }
 
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-col gap-4 m-2">
-        <div>{post.title}</div>
-        {/* @ts-expect-error */}
-        <div>{post.date}</div>
-        <div>{post.text}</div>
+        <div>{data.post.title}</div>
+        <div>{data.post.date}</div>
+        <div>{data.post.text}</div>
       </div>
-      <Comments comments={commentList as IComment[]} />
+      <Comments comments={data.commentList as IComment[]} />
     </div>
   );
 }

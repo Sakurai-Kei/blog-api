@@ -6,6 +6,9 @@ export default function Header() {
   const user = useUser();
   const [show, setShow] = useState("hidden");
 
+  const buttonClass =
+    "px-2 py-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded dark:text-gray-200 hover:bg-gradient-to-br hover:from-indigo-500 hover:via-blue-500 hover:to-pink-500 hover:text-gray-200 md:mx-2";
+
   function showMenu() {
     if (show === "hidden") {
       setShow("");
@@ -51,47 +54,33 @@ export default function Header() {
         >
           <div className="flex flex-col px-2 py-3 -mx-4 md:flex-row md:mx-0 md:py-0">
             <Link href={"/"}>
-              <a className="px-2 py-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded dark:text-gray-200 hover:bg-blue-500 hover:text-gray-100 md:mx-2">
-                Home
-              </a>
+              <a className={buttonClass}>Home</a>
             </Link>
             <Link href={"/posts"}>
-              <a className="px-2 py-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded dark:text-gray-200 hover:bg-blue-500 hover:text-gray-100 md:mx-2">
-                Posts
-              </a>
+              <a className={buttonClass}>Posts</a>
             </Link>
             <Link href={"/contact"}>
-              <a className="px-2 py-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded dark:text-gray-200 hover:bg-blue-500 hover:text-gray-100 md:mx-2">
-                Contact
-              </a>
+              <a className={buttonClass}>Contact</a>
             </Link>
           </div>
           <div className="flex flex-col px-2 py-3 -mx-4 md:flex-row">
             {!user && (
               <>
                 <Link href={"/log-in"}>
-                  <a className="px-2 py-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded dark:text-gray-200 hover:bg-blue-500 hover:text-gray-100 md:mx-2">
-                    Log In
-                  </a>
+                  <a className={buttonClass}>Log In</a>
                 </Link>
                 <Link href={"/sign-up"}>
-                  <a className="px-2 py-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded dark:text-gray-200 hover:bg-blue-500 hover:text-gray-100 md:mx-2">
-                    Sign Up
-                  </a>
+                  <a className={buttonClass}>Sign Up</a>
                 </Link>
               </>
             )}
             {user && (
               <>
                 <Link href={`/user/${user.username}`}>
-                  <a className="px-2 py-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded dark:text-gray-200 hover:bg-blue-500 hover:text-gray-100 md:mx-2">
-                    {user.username}
-                  </a>
+                  <a className={buttonClass}>{user.username}</a>
                 </Link>
                 <Link href={"/api/log-out"}>
-                  <a className="px-2 py-1 text-sm font-medium text-gray-700 transition-colors duration-200 transform rounded dark:text-gray-200 hover:bg-blue-500 hover:text-gray-100 md:mx-2">
-                    Log Out
-                  </a>
+                  <a className={buttonClass}>Log Out</a>
                 </Link>
               </>
             )}

@@ -19,7 +19,6 @@ export default function User() {
   const { data, error } = useSWR<ProfilePageData>(
     router.query.id ? `/api/user/${router.query.id}` : null
   );
-  console.log(data);
 
   const rowClass =
     "flex flex-col sm:flex-row justify-between items-center sm:items-start py-3 border-t border-gray-300 last:border-none";
