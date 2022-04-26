@@ -56,7 +56,7 @@ export default function LogIn<NextPage>() {
   });
 
   return (
-    <>
+    <div className="w-full flex justify-center bg-gradient-to-br from-pink-300 to-pink-500">
       <div className="flex flex-col w-full max-w-md m-4 px-4 py-8 bg-white rounded-lg shadow dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10">
         <div className="self-center mb-6 text-xl font-light text-gray-600 sm:text-2xl dark:text-white">
           Login To Your Account
@@ -153,6 +153,6 @@ export default function LogIn<NextPage>() {
           </Link>
         </div>
       </div>
-    </>
+    </div>
   );
 }

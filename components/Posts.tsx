@@ -11,13 +11,13 @@ export default function Posts(props: PostsProp) {
     return <div>Loading Posts</div>;
   }
   return (
-    <div className="flex flex-col flex-1 gap-2">
+    <div className="flex flex-col flex-1 gap-2 m-4">
       {blogPosts!.length !== 0 &&
         blogPosts!.map((post) => {
           return (
             <div
               key={post._id.toString()}
-              className="w-full px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800"
+              className="w-full px-8 py-4 rounded-lg shadow-md dark:bg-gray-800 bg-gradient-to-r from-blue-300 to-indigo-300"
             >
               <div className="flex items-center justify-between">
                 <span className="text-sm font-light text-gray-600 dark:text-gray-400">

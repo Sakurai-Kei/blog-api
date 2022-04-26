@@ -13,12 +13,12 @@ export default function Comments(props: Props) {
   }
 
   return (
-    <>
+    <div className="p-4 bg-gradient-to-b from-blue-400 to-pink-400 rounded-lg shadow-lg">
       {comments.map((comment) => {
         return (
           <div
             key={comment._id}
-            className="flex gap-2 justify-between w-full px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800"
+            className="flex gap-2 justify-between w-full px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800 bg-gradient-to-r from-pink-300 to-pink-400"
           >
             <div className="mt-2">
               <h3>{comment.author.username}</h3>
@@ -36,6 +36,6 @@ export default function Comments(props: Props) {
           </div>
         );
       })}
-    </>
+    </div>
   );
 }

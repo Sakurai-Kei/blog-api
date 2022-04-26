@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="bg-white dark:bg-gray-800">
+    <footer className="bg-white dark:bg-gray-800 bg-gradient-to-b from-slate-300 to-slate-400">
       <div className="container px-6 py-4 mx-auto">
         <div className="lg:flex">
           <div className="w-full -mx-6 lg:w-2/5">
