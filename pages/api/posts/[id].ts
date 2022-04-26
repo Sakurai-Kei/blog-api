@@ -10,9 +10,9 @@ export default withIronSessionApiRoute(handler, sessionOptions);
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const postId = req.query.id;
-  await dbConnect();
+  (await dbConnect()).connection;
   try {
-    const post = await Post.findOne({ postId }).exec();
+    const post = await Post.findOne({ _id: postId }).exec();
     if (!post) {
       res.status(404).json(false);
     } else {

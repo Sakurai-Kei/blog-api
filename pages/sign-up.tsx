@@ -55,7 +55,6 @@ export default function SignUp<NextPage>() {
         error: "Password and confirm password does not match",
       });
     } else if (response.status === 409) {
-      // Tells user username or email already in use
       const result = await response.json();
       const { error, alreadyExist } = result;
 
@@ -65,8 +64,10 @@ export default function SignUp<NextPage>() {
       });
     } else {
       const result = await response.json();
-      // Display error message to user here
-      console.log(result);
+      setErrors({
+        ...errors,
+        error: result.error,
+      });
     }
   }
 

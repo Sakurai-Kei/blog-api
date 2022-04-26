@@ -18,7 +18,7 @@ export default function Post<NextPage>() {
   }
 
   return (
-    <div className="flex flex-col gap-4 px-4 py-2 bg-gradient-to-r from-blue-300 to-indigo-300">
+    <div className="w-full flex flex-col gap-4 px-4 py-2 bg-gradient-to-r from-blue-300 to-indigo-300">
       <div className="flex flex-col gap-4 m-2">
         <div>{data.post.title}</div>
         <div>{data.post.date}</div>
