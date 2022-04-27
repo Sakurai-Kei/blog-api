@@ -31,8 +31,8 @@ export default function User() {
   }
 
   return (
-    <div className="flex w-full m-4 gap-4 ">
-      <div className="flex-1 px-4 py-2 rounded-lg shadow-md bg-gradient-to-r from-blue-300 to-indigo-300">
+    <div className="flex flex-wrap w-full m-4 gap-4 ">
+      <div className="h-fit flex-1 m-2 px-4 py-2 rounded-lg shadow-md bg-gradient-to-r from-blue-300 to-indigo-300">
         <div className="w-full">
           <h3 className="text-2xl font-medium">User Details</h3>
           <div className="mt-4">
