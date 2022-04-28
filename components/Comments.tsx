@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useReducer } from "react";
+import React, { BaseSyntheticEvent, SyntheticEvent, useReducer } from "react";
 import { FormEvent, useState } from "react";
 import { useSWRConfig } from "swr";
 import useUser from "../lib/useUser";
@@ -25,6 +25,25 @@ export default function Comments(props: Props) {
       ...formData,
       author: user.username,
     });
+  }
+
+  async function deleteComment(event: SyntheticEvent) {
+    event.preventDefault();
+    const commentId = (event.target as HTMLElement).id;
+    const JSONdata = JSON.stringify(commentId);
+    const endpoint = "/api/posts/deleteComment";
+    const options = {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSONdata,
+    };
+    const response = await fetch(endpoint, options);
+    if (response.status !== 200) {
+      const result = await response.json();
+      console.log("Some error has occured: ", result.error);
+    }
   }
 
   function handleChange(
@@ -114,12 +133,32 @@ export default function Comments(props: Props) {
             className="flex gap-2 justify-between w-full px-8 py-4  rounded-lg shadow-md dark:bg-gray-800 bg-gradient-to-b from-blue-300 to-blue-400"
           >
             <div className="mt-2 bg-white w-full rounded-lg shadow-md px-4 py-2">
-              <h3>{comment.author.username}</h3>
+              <div className="flex gap-2 justify-between">
+                <h3>{comment.author.username}</h3>
+                {comment.author.username === user.username && (
+                  <button onClick={deleteComment}>
+                    <svg
+                      id={comment._id.toString()}
+                      className="w-8 hover:stroke-red-500 hover:rounded-lg"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      ></path>
+                    </svg>
+                  </button>
+                )}
+              </div>
               <p className="b mt-2 text-gray-600 dark:text-gray-300">
                 {comment.text}
               </p>
-              {/* @ts-expect-error */}
-              <p>{comment.date}</p>
+              <p>{comment.date.toString()}</p>
             </div>
             <Link href={"/posts/" + comment.posts._id}>
               <a className="flex items-center bg-white rounded-lg shadow-md px-4 py-2 text-blue-600 dark:text-blue-400 hover:underline mt-2">
