@@ -11,12 +11,10 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   const formData = req.body;
 
   if (!req.session.user || !req.session.user.isAuthor) {
-    res
-      .status(400)
-      .json({
-        error:
-          "User does not have the necessary auth requirement. Redirecting to post page",
-      });
+    res.status(400).json({
+      error:
+        "User does not have the necessary auth requirement. Redirecting to post page",
+    });
     res.end();
   }
 

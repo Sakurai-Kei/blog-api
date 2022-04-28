@@ -12,7 +12,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   const postId = req.query.id;
   (await dbConnect()).connection;
   try {
-    const post = await Post.findOne({ _id: postId }).exec();
+    const post = await Post.findById(postId).populate("authors").exec();
     if (!post) {
       res.status(404).json(false);
     } else {
