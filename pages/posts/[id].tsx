@@ -45,7 +45,7 @@ export default function Post<NextPage>() {
     setTimeout(() => {
       router.push("/posts");
     }, 3000);
-    return <div>Failed to load post.Redirecting back to posts page</div>;
+    return <div>Failed to load post. Redirecting back to posts page</div>;
   }
   if (!data) {
     return <div>Loading</div>;

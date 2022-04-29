@@ -52,7 +52,7 @@ export default function SignUp<NextPage>() {
 
       setErrors({
         ...errors,
-        error: "Password and confirm password does not match",
+        error,
       });
     } else if (response.status === 409) {
       const result = await response.json();
@@ -88,9 +88,7 @@ export default function SignUp<NextPage>() {
           </a>
         </span>
         {(errors.alreadyExist || errors.error) && (
-          <div className="self-center mt-2 text-xl text-red-500">
-            {errors.error}
-          </div>
+          <div className="text-red-500 mt-2 text-xl">{errors.error}</div>
         )}
 
         <div className="p-6 mt-8">
@@ -100,7 +98,7 @@ export default function SignUp<NextPage>() {
                 <input
                   type="text"
                   onChange={handleChange}
-                  className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                  className="rounded-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                   name="firstName"
                   placeholder="First name"
                 />
@@ -109,7 +107,7 @@ export default function SignUp<NextPage>() {
                 <input
                   type="text"
                   onChange={handleChange}
-                  className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                  className="rounded-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                   name="lastName"
                   placeholder="Last name"
                 />
@@ -120,7 +118,7 @@ export default function SignUp<NextPage>() {
                 <input
                   type="text"
                   onChange={handleChange}
-                  className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                  className="rounded-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                   name="username"
                   placeholder="Username"
                 />
@@ -131,7 +129,7 @@ export default function SignUp<NextPage>() {
                 <input
                   type="password"
                   onChange={handleChange}
-                  className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                  className="rounded-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                   name="password"
                   placeholder="Password"
                 />
@@ -142,7 +140,7 @@ export default function SignUp<NextPage>() {
                 <input
                   type="password"
                   onChange={handleChange}
-                  className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                  className="rounded-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                   name="confirmPassword"
                   placeholder="Confirm Password"
                 />
@@ -153,7 +151,7 @@ export default function SignUp<NextPage>() {
                 <input
                   type="email"
                   onChange={handleChange}
-                  className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                  className="rounded-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                   name="email"
                   placeholder="Email"
                 />

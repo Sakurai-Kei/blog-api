@@ -1,7 +1,6 @@
 import Link from "next/link";
-import React, { BaseSyntheticEvent, SyntheticEvent, useReducer } from "react";
+import React, { SyntheticEvent } from "react";
 import { FormEvent, useState } from "react";
-import { useSWRConfig } from "swr";
 import useUser from "../lib/useUser";
 import { IComment } from "../models/comment";
 

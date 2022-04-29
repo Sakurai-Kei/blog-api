@@ -2,7 +2,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 import bcrypt from "bcryptjs";
 import User, { IUser } from "../../models/user";
 import { withSessionRoute } from "../../lib/withSession";
-import db from "../../lib/mongodb";
 import dbConnect from "../../lib/mongodb";
 
 export default withSessionRoute(handler);

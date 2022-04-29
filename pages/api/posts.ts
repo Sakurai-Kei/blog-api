@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { withSessionRoute } from "../../lib/withSession";
-import Post, { IPost } from "../../models/post";
+import Post from "../../models/post";
 import dbConnect from "../../lib/mongodb";
 import User from "../../models/user";
 

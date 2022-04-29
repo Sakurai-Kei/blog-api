@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "../../../lib/mongodb";
 import { withSessionRoute } from "../../../lib/withSession";
-import Comment, { IComment } from "../../../models/comment";
+import Comment from "../../../models/comment";
 import Post, { IPost } from "../../../models/post";
 import User, { IUser } from "../../../models/user";
 

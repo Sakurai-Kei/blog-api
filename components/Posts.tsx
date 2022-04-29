@@ -8,7 +8,11 @@ interface PostsProp {
 export default function Posts(props: PostsProp) {
   const { blogPosts } = props;
   if (!blogPosts) {
-    return <div>Loading Posts</div>;
+    return (
+      <div className="flex flex-col flex-1 gap-2 m-4 items-center">
+        Loading Posts
+      </div>
+    );
   }
   return (
     <div className="flex flex-col flex-1 gap-2 m-4">
@@ -53,7 +57,11 @@ export default function Posts(props: PostsProp) {
             </div>
           );
         })}
-      {/* {data.posts!.length === 0 && <div>No post history</div>} */}
+      {blogPosts.length === 0 && (
+        <div className="flex flex-col flex-1 gap-2 m-4 items-center">
+          No posts found
+        </div>
+      )}
     </div>
   );
 }
