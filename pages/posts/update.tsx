@@ -63,6 +63,10 @@ export default function UpdatePost<NextPage>() {
     setFormData(data.post);
   }
 
+  if (!router.query.id) {
+    return <div>No query id provided</div>;
+  }
+
   if (!data) {
     return <div>Loading</div>;
   }

@@ -7,7 +7,7 @@ import { IComment } from "../models/comment";
 
 interface Props {
   comments: IComment[];
-  postId: string;
+  postId: string | null;
 }
 
 export default function Comments(props: Props) {
@@ -29,7 +29,7 @@ export default function Comments(props: Props) {
 
   async function deleteComment(event: SyntheticEvent) {
     event.preventDefault();
-    const commentId = (event.target as HTMLElement).id;
+    const commentId = event.currentTarget.id;
     const JSONdata = JSON.stringify(commentId);
     const endpoint = "/api/posts/deleteComment";
     const options = {
@@ -136,9 +136,8 @@ export default function Comments(props: Props) {
               <div className="flex gap-2 justify-between">
                 <h3>{comment.author.username}</h3>
                 {comment.author.username === user.username && (
-                  <button onClick={deleteComment}>
+                  <button onClick={deleteComment} id={comment._id.toString()}>
                     <svg
-                      id={comment._id.toString()}
                       className="w-8 hover:stroke-red-500 hover:rounded-lg"
                       fill="none"
                       stroke="currentColor"

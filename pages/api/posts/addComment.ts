@@ -15,6 +15,10 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     res.end();
   }
 
+  if (!req.body) {
+    res.redirect("/");
+  }
+
   try {
     const { text, author, postId } = req.body;
 

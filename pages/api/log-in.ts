@@ -8,7 +8,7 @@ import dbConnect from "../../lib/mongodb";
 export default withSessionRoute(handler);
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-  await dbConnect();
+  (await dbConnect()).connection;
   if (!req.body.loginId || !req.body.password) {
     res.redirect("/log-in");
   }

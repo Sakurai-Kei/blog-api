@@ -8,6 +8,9 @@ export default withIronSessionApiRoute(handler, sessionOptions);
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   (await dbConnect()).connection;
+  if (!req.body) {
+    res.redirect("/posts");
+  }
   const formData = req.body;
 
   if (!req.session.user || !req.session.user.isAuthor) {

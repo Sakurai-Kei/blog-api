@@ -12,12 +12,14 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   const postId = req.query.id;
   (await dbConnect()).connection;
   try {
-    const post = await Post.findById(postId).populate("authors").exec();
+    const post = await Post.findById(postId)
+      .populate("authors", "-password")
+      .exec();
     if (!post) {
       res.status(404).json(false);
     } else {
       const commentList = await Comment.find({ posts: postId })
-        .populate({ path: "author" })
+        .populate({ path: "author", select: "-password" })
         .populate({ path: "posts" })
         .exec();
       const data = {

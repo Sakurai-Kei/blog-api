@@ -63,7 +63,7 @@ export default function User() {
         </div>
         <div className="flex flex-col flex-1 gap-2">
           {data.commentList && (
-            <Comments comments={data.commentList as IComment[]} />
+            <Comments comments={data.commentList as IComment[]} postId={null} />
           )}
         </div>
       </div>

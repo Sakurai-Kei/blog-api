@@ -14,6 +14,10 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     res.end();
   }
 
+  if (!req.body) {
+    res.redirect("/posts/create");
+  }
+
   try {
     const { title, text } = req.body;
     const { user } = req.session;

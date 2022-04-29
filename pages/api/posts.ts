@@ -1,17 +1,18 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { sessionOptions, withSessionRoute } from "../../lib/withSession";
+import { withSessionRoute } from "../../lib/withSession";
 import Post, { IPost } from "../../models/post";
-import { withIronSessionApiRoute } from "iron-session/next";
 import dbConnect from "../../lib/mongodb";
 import User from "../../models/user";
 
-export default withIronSessionApiRoute(handler, sessionOptions);
+export default withSessionRoute(handler);
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   (await dbConnect()).connection;
   try {
     const authorList = await User.find({ isAuthor: true }).exec();
-    const postList = await Post.find().populate("authors").exec();
-    res.json(postList);
+    const postList = await Post.find()
+      .populate({ path: "authors", select: "-password" })
+      .exec();
+    res.status(200).json(postList);
   } catch (error) {}
 }

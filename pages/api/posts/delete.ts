@@ -18,10 +18,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   if (!req.body.postId) {
-    res.status(400).json({ error: "No valid body detected is attached" });
+    res.status(400).json({ error: "No valid postId detected" });
     res.end();
   }
-  // MAKE SURE TO DELETE COMMENTS ASSOCIATED WITH POST
   try {
     const postId = req.body;
     const { user } = req.session;

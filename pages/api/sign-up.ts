@@ -1,12 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import User, { IUser } from "../../models/user";
 import bcrypt from "bcryptjs";
-import db from "../../lib/mongodb";
+import { withSessionRoute } from "../../lib/withSession";
+import dbConnect from "../../lib/mongodb";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default withSessionRoute(handler);
+
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (!req.body.username || !req.body.password || !req.body.email) {
     res.redirect("/sign-up");
   }
@@ -17,12 +17,11 @@ export default async function handler(
   const { user } = req.session;
 
   if (user) {
-    res.status(200).json({ user });
-    res.end();
+    res.redirect("/");
   }
 
   try {
-    db;
+    (await dbConnect()).connection;
 
     const userExist: IUser = await User.findOne({
       $or: [{ username }, { email }],

@@ -17,6 +17,10 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     res.end();
   }
 
+  if (!req.body) {
+    res.redirect("/");
+  }
+
   try {
     const commentId = req.body;
     const { user } = req.session;
