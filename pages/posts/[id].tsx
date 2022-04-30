@@ -7,15 +7,15 @@ import useUser from "../../lib/useUser";
 import { IComment } from "../../models/comment";
 import { IPost } from "../../models/post";
 
-interface SWRProp {
+export interface PostPageSWRProp {
   post: IPost;
   commentList: IComment[];
 }
 
 export default function Post<NextPage>() {
   const router = useRouter();
-  const user = useUser();
-  const { data, error } = useSWR<SWRProp>(
+  const { user } = useUser();
+  const { data, error, mutate } = useSWR<PostPageSWRProp>(
     router.query.id ? `/api/posts/${router.query.id}` : null
   );
 
@@ -33,6 +33,7 @@ export default function Post<NextPage>() {
     };
 
     const response = await fetch(endpoint, options);
+    console.log(response.status);
     if (response.status === 200) {
       router.push("/posts");
     } else {
@@ -82,6 +83,7 @@ export default function Post<NextPage>() {
           <div>{data.post.text}</div>
         </div>
         <Comments
+          mutate={mutate}
           comments={data.commentList as IComment[]}
           postId={router.query.id as string}
         />

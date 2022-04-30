@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { withIronSessionApiRoute } from "iron-session/next";
 import { sessionOptions } from "../../../lib/withSession";
-import User, { IUser } from "../../../models/user";
+import User from "../../../models/user";
 import dbConnect from "../../../lib/mongodb";
 import Post from "../../../models/post";
 import Comment from "../../../models/comment";

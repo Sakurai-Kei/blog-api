@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import useUser from "../lib/useUser";
 
 export default function Header() {
-  const user = useUser();
+  const { user, mutateUser } = useUser();
   const [show, setShow] = useState("hidden");
 
   const buttonClass =

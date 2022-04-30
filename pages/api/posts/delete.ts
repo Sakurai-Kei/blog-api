@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "../../../lib/mongodb";
 import { withSessionRoute } from "../../../lib/withSession";
 import Comment from "../../../models/comment";
-import Post, { IPost } from "../../../models/post";
+import Post from "../../../models/post";
 import User, { IUser } from "../../../models/user";
 
 export default withSessionRoute(handler);
@@ -17,7 +17,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     res.end();
   }
 
-  if (!req.body.postId) {
+  if (!req.body) {
     res.status(400).json({ error: "No valid postId detected" });
     res.end();
   }

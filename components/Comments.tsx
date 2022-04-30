@@ -1,17 +1,21 @@
 import Link from "next/link";
 import React, { SyntheticEvent } from "react";
 import { FormEvent, useState } from "react";
+import { KeyedMutator } from "swr";
 import useUser from "../lib/useUser";
 import { IComment } from "../models/comment";
+import { PostPageSWRProp } from "../pages/posts/[id]";
+import { ProfilePageData } from "../pages/user/[id]";
 
 interface Props {
   comments: IComment[];
   postId: string | null;
+  mutate: KeyedMutator<PostPageSWRProp> | KeyedMutator<ProfilePageData>;
 }
 
 export default function Comments(props: Props) {
-  const { comments, postId } = props;
-  const user = useUser();
+  const { comments, postId, mutate } = props;
+  const { user } = useUser();
 
   const [formData, setFormData] = useState({
     text: "",
@@ -39,6 +43,7 @@ export default function Comments(props: Props) {
       body: JSONdata,
     };
     const response = await fetch(endpoint, options);
+    await mutate!();
     if (response.status !== 200) {
       const result = await response.json();
       console.log("Some error has occured: ", result.error);
@@ -68,6 +73,7 @@ export default function Comments(props: Props) {
     };
 
     const response = await fetch(endpoint, options);
+    await mutate!();
 
     setFormData({
       ...formData,

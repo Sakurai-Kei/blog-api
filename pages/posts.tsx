@@ -6,7 +6,7 @@ import useUser from "../lib/useUser";
 
 export default function PostsList<NextPage>() {
   const router = useRouter();
-  const user = useUser();
+  const { user } = useUser();
   const { data: post, error: postError } = useSWR("/api/posts");
 
   if (!user || !user.isAuthor) {

@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <SWRConfig
       value={{
         fetcher: fetchJson,
-        refreshInterval: 3000,
+        refreshInterval: 60000,
         onError: (err) => {
           console.error(err);
         },
