@@ -19,15 +19,14 @@ export default function Header() {
 
   return (
     <nav className="bg-white shadow dark:bg-gray-800 bg-gradient-to-r from-indigo-300 via-blue-400 to-pink-300">
-      <div className="container px-6 py-3 mx-auto md:flex">
+      <div className="container px-4 py-3 mx-auto md:flex">
         <div className="flex items-center justify-between">
           <div>
-            <a
-              className="text-2xl font-bold text-gray-800 transition-colors duration-200 transform dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300"
-              href="#"
-            >
-              Brand
-            </a>
+            <Link href={"/"}>
+              <a className="text-2xl font-bold text-gray-800 transition-colors duration-200 transform dark:text-white lg:text-3xl hover:text-gray-700 dark:hover:text-gray-300">
+                SK Blog-API Project
+              </a>
+            </Link>
           </div>
 
           {/* <!-- Mobile menu button --> */}
@@ -59,8 +58,8 @@ export default function Header() {
             <Link href={"/posts"}>
               <a className={buttonClass}>Posts</a>
             </Link>
-            <Link href={"/contact"}>
-              <a className={buttonClass}>Contact</a>
+            <Link href={"/about"}>
+              <a className={buttonClass}>About</a>
             </Link>
           </div>
           <div className="flex flex-col px-2 py-3 -mx-4 md:flex-row">
