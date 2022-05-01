@@ -10,10 +10,10 @@ export default function Hero() {
       <div className="items-center lg:flex">
         <div className="w-full lg:w-1/2">
           <div className="lg:max-w-lg">
-            <h1 className="text-2xl font-semibold text-gray-800 uppercase dark:text-white lg:text-3xl">
+            <h1 className="text-2xl font-semibold text-gray-800 uppercase lg:text-3xl">
               Blog web app made by using NextJs Framework
             </h1>
-            <p className="mt-2 mb-4 text-gray-600 dark:text-gray-400">
+            <p className="mt-2 mb-4 text-gray-600">
               The web app allows user to make an account and register, allowing
               them to leave a comment on any post. Users are allowed to delete
               their own comments and account(should the user request account

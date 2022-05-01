@@ -21,34 +21,30 @@ export default function Posts(props: PostsProp) {
           return (
             <div
               key={post._id.toString()}
-              className="w-full px-8 py-4 rounded-lg shadow-md dark:bg-gray-800 bg-gradient-to-r from-blue-300 to-indigo-300"
+              className="w-full px-8 py-4 rounded-lg shadow-md bg-gradient-to-r from-blue-300 to-indigo-300"
             >
               <div className="flex items-center justify-between">
-                <span className="text-sm font-light text-gray-600 dark:text-gray-400">
+                <span className="text-sm font-light text-gray-600">
                   {post.dateFormatted}
                 </span>
               </div>
 
               <div className="mt-2">
                 <Link href={"/posts/" + post._id}>
-                  <a className="text-2xl font-bold text-gray-700 dark:text-white hover:text-gray-600 dark:hover:text-gray-200 hover:underline">
+                  <a className="text-2xl font-bold text-gray-700 hover:text-gray-600 hover:underline">
                     {post.title}
                   </a>
                 </Link>
-                <p className="mt-2 text-gray-600 dark:text-gray-300">
-                  {post.text}
-                </p>
+                <p className="mt-2 text-gray-600">{post.text}</p>
               </div>
 
               <div className="flex items-center justify-between mt-4">
                 <Link href={"/posts/" + post._id}>
-                  <a className="text-blue-600 dark:text-blue-400 hover:underline">
-                    Read more
-                  </a>
+                  <a className="text-blue-600 hover:underline">Read more</a>
                 </Link>
 
                 <div className="flex items-center">
-                  <a className="font-bold text-gray-700 cursor-pointer dark:text-gray-200">
+                  <a className="font-bold text-gray-700 cursor-pointer">
                     {post.authors.username}
                   </a>
                 </div>

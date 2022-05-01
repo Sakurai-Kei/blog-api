@@ -14,11 +14,11 @@ interface SignUpFormProps {
 export default function SignUpForm(props: SignUpFormProps) {
   const { errors, handleSubmit, handleChange } = props;
   return (
-    <div className="flex flex-col max-w-md m-4 px-4 py-8 bg-white rounded-lg shadow dark:bg-gray-800 sm:px-6 md:px-8 lg:px-10">
-      <div className="self-center mb-2 text-xl font-light text-gray-800 sm:text-2xl dark:text-white">
+    <div className="flex flex-col max-w-md m-4 px-4 py-8 bg-white rounded-lg shadow sm:px-6 md:px-8 lg:px-10">
+      <div className="self-center mb-2 text-xl font-light text-gray-800 sm:text-2xl">
         Create a new account
       </div>
-      <span className="justify-center text-sm text-center text-gray-500 flex-items-center dark:text-gray-400">
+      <span className="justify-center text-sm text-center text-gray-500 flex-items-center">
         Already have an account?
         <a
           href="#"

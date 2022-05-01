@@ -1,11 +1,9 @@
 export default function AboutMeText() {
   return (
     <div className="lg:w-1/2">
-      <h2 className="text-3xl font-bold text-gray-800 dark:text-gray-100">
-        Who I am
-      </h2>
+      <h2 className="text-3xl font-bold text-gray-800">Who I am</h2>
 
-      <p className="mt-4 text-gray-500 dark:text-gray-400 lg:max-w-md">
+      <p className="mt-4 text-gray-500 lg:max-w-md">
         Hi, I am Sakurai Kei , self-taught full-stack developer. I graduated
         with Bachelor&apos;s Degree in Mechanical Engineering from Universiti
         Malaya. Since then, I have been self-studying on web development by
@@ -16,7 +14,7 @@ export default function AboutMeText() {
       <div className="flex items-center mt-6 -mx-2">
         <a className="mx-2" href="#" aria-label="Twitter">
           <svg
-            className="w-5 h-5 text-gray-700 fill-current dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
+            className="w-5 h-5 text-gray-700 fill-current  hover:text-gray-600"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
           >
@@ -26,7 +24,7 @@ export default function AboutMeText() {
 
         <a className="mx-2" href="#" aria-label="Linkden">
           <svg
-            className="w-5 h-5 text-gray-700 fill-current dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
+            className="w-5 h-5 text-gray-700 fill-current hover:text-gray-600"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
           >
@@ -36,7 +34,7 @@ export default function AboutMeText() {
 
         <a className="mx-2" href="#" aria-label="Github">
           <svg
-            className="w-5 h-5 text-gray-700 fill-current dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
+            className="w-5 h-5 text-gray-700 fill-current hover:text-gray-600"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
           >

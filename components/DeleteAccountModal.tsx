@@ -29,13 +29,13 @@ export default function DeleteAccountModal(
               <div className="rounded-t-lg p-8 bg-white shadow">
                 <div className="p-4">
                   <div className="text-center">
-                    <p className="text-2xl text-gray-800 dark:text-white">
+                    <p className="text-2xl text-gray-800">
                       {data.user.fullName}
                     </p>
-                    <p className="text-xl text-gray-500 dark:text-gray-200 font-light">
+                    <p className="text-xl text-gray-500">
                       {data.user.username}
                     </p>
-                    <p className="text-md text-gray-500 dark:text-gray-400 max-w-xs py-4 font-light"></p>
+                    <p className="text-md text-gray-500"></p>
                   </div>
                 </div>
               </div>

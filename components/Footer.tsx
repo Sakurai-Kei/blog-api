@@ -2,27 +2,27 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-white dark:bg-gray-800 bg-gradient-to-b from-slate-300 to-slate-400">
+    <footer className="bg-white bg-gradient-to-b from-slate-300 to-slate-400">
       <div className="container px-6 py-4 mx-auto">
         <div className="lg:flex">
           <div className="w-full -mx-6 lg:w-2/5">
             <div className="px-6">
               <div>
                 <Link href={"/"}>
-                  <a className="text-xl font-bold text-gray-800 dark:text-white hover:text-gray-700 dark:hover:text-gray-300">
+                  <a className="text-xl font-bold text-gray-800 hover:text-gray-700">
                     SK Blog-API Project
                   </a>
                 </Link>
               </div>
 
-              <p className="max-w-md mt-2 text-gray-500 dark:text-gray-400">
+              <p className="max-w-md mt-2 text-gray-500">
                 I hope you enjoyed your visit!
               </p>
 
               <div className="flex mt-4 -mx-2">
                 <a
                   href="#"
-                  className="mx-2 text-gray-700 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
+                  className="mx-2 text-gray-700 hover:text-gray-600"
                   aria-label="Linkden"
                 >
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 512 512">
@@ -32,7 +32,7 @@ export default function Footer() {
 
                 <a
                   href="#"
-                  className="mx-2 text-gray-700 dark:text-gray-200 hover:text-gray-600 dark:hover:text-gray-400"
+                  className="mx-2 text-gray-700 hover:text-gray-600"
                   aria-label="Twitter"
                 >
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 512 512">
@@ -46,82 +46,74 @@ export default function Footer() {
           <div className="mt-6 lg:mt-0 lg:flex-1">
             <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4">
               <div>
-                <h3 className="text-gray-700 uppercase dark:text-white">
-                  About
-                </h3>
+                <h3 className="text-gray-700 uppercase">About</h3>
                 <a
                   href="#"
-                  className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline"
+                  className="block mt-2 text-sm text-gray-600 hover:underline"
                 >
                   Company
                 </a>
                 <a
                   href="#"
-                  className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline"
+                  className="block mt-2 text-sm text-gray-600 hover:underline"
                 >
                   community
                 </a>
                 <a
                   href="#"
-                  className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline"
+                  className="block mt-2 text-sm text-gray-600 hover:underline"
                 >
                   Careers
                 </a>
               </div>
 
               <div>
-                <h3 className="text-gray-700 uppercase dark:text-white">
-                  Blog
-                </h3>
+                <h3 className="text-gray-700 uppercase">Blog</h3>
                 <a
                   href="#"
-                  className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline"
+                  className="block mt-2 text-sm text-gray-600 hover:underline"
                 >
                   Tech
                 </a>
                 <a
                   href="#"
-                  className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline"
+                  className="block mt-2 text-sm text-gray-600 hover:underline"
                 >
                   Music
                 </a>
                 <a
                   href="#"
-                  className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline"
+                  className="block mt-2 text-sm text-gray-600 hover:underline"
                 >
                   Videos
                 </a>
               </div>
 
               <div>
-                <h3 className="text-gray-700 uppercase dark:text-white">
-                  Products
-                </h3>
+                <h3 className="text-gray-700 uppercase">Products</h3>
                 <a
                   href="https://nextjs.org/"
-                  className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline"
+                  className="block mt-2 text-sm text-gray-600 hover:underline"
                 >
                   NextJs
                 </a>
                 <a
                   href="https://www.mongodb.com/"
-                  className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline"
+                  className="block mt-2 text-sm text-gray-600 hover:underline"
                 >
                   MongoDB
                 </a>
                 <a
                   href="https://github.com/merakiui/merakiui"
-                  className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline"
+                  className="block mt-2 text-sm text-gray-600 hover:underline"
                 >
                   Meraki UI
                 </a>
               </div>
 
               <div className="flex flex-col">
-                <h3 className="text-gray-700 uppercase dark:text-white">
-                  Contact
-                </h3>
-                <span className="break-all mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">
+                <h3 className="text-gray-700 uppercase">Contact</h3>
+                <span className="break-all mt-2 text-sm text-gray-600 hover:underline">
                   luqmanulraiserhakim@gmail.com
                 </span>
               </div>
@@ -129,10 +121,10 @@ export default function Footer() {
           </div>
         </div>
 
-        <hr className="h-px my-6 bg-gray-300 border-none dark:bg-gray-700" />
+        <hr className="h-px my-6 bg-gray-300 border-none" />
 
         <div>
-          <p className="text-center text-gray-800 dark:text-white">
+          <p className="text-center text-gray-800">
             © Sakurai Kei 2022 - All rights reserved
           </p>
         </div>

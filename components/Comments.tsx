@@ -98,7 +98,7 @@ export default function Comments(props: Props) {
           No comment posted yet
         </div>
         {postId && (
-          <div className="flex gap-2 justify-between w-full px-8 py-4 rounded-lg shadow-md dark:bg-gray-800 bg-gradient-to-b from-blue-300 to-blue-400">
+          <div className="flex gap-2 justify-between w-full px-8 py-4 rounded-lg shadow-md bg-gradient-to-b from-blue-300 to-blue-400">
             <form
               method="post"
               action="/api/posts/addComment"
@@ -117,7 +117,7 @@ export default function Comments(props: Props) {
               </div>
               <button
                 type="submit"
-                className="flex items-center bg-white rounded-lg shadow-md px-4 py-2 text-blue-600 dark:text-blue-400 hover:underline m-2"
+                className="flex items-center bg-white rounded-lg shadow-md px-4 py-2 text-blue-600 hover:underline m-2"
               >
                 Comment
               </button>
@@ -135,7 +135,7 @@ export default function Comments(props: Props) {
         return (
           <div
             key={comment._id}
-            className="flex gap-2 justify-between w-full px-8 py-4  rounded-lg shadow-md dark:bg-gray-800 bg-gradient-to-b from-blue-300 to-blue-400"
+            className="flex gap-2 justify-between w-full px-8 py-4  rounded-lg shadow-md bg-gradient-to-b from-blue-300 to-blue-400"
           >
             <div className="mt-2 bg-white w-full rounded-lg shadow-md px-4 py-2">
               <div className="flex gap-2 justify-between">
@@ -159,13 +159,11 @@ export default function Comments(props: Props) {
                   </button>
                 )}
               </div>
-              <p className="b mt-2 text-gray-600 dark:text-gray-300">
-                {comment.text}
-              </p>
+              <p className="b mt-2 text-gray-600">{comment.text}</p>
               <p>{comment.dateFormatted}</p>
             </div>
             <Link href={"/posts/" + comment.posts._id}>
-              <a className="flex items-center bg-white rounded-lg shadow-md px-4 py-2 text-blue-600 dark:text-blue-400 hover:underline mt-2">
+              <a className="flex items-center bg-white rounded-lg shadow-md px-4 py-2 text-blue-600 hover:underline mt-2">
                 Post Link
               </a>
             </Link>
@@ -173,7 +171,7 @@ export default function Comments(props: Props) {
         );
       })}
       {postId && (
-        <div className="flex gap-2 justify-between w-full px-8 py-4 rounded-lg shadow-md dark:bg-gray-800 bg-gradient-to-b from-blue-300 to-blue-400">
+        <div className="flex gap-2 justify-between w-full px-8 py-4 rounded-lg shadow-md bg-gradient-to-b from-blue-300 to-blue-400">
           <form
             method="post"
             action="/api/posts/addComment"
@@ -192,7 +190,7 @@ export default function Comments(props: Props) {
             </div>
             <button
               type="submit"
-              className="flex items-center bg-white rounded-lg shadow-md px-4 py-2 text-blue-600 dark:text-blue-400 hover:underline m-2"
+              className="flex items-center bg-white rounded-lg shadow-md px-4 py-2 text-blue-600 hover:underline m-2"
             >
               Comment
             </button>

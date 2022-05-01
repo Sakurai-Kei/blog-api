@@ -26,15 +26,11 @@ export default function newFunction() {
           </div>
 
           <div className="px-6 py-4">
-            <h1 className="text-xl font-semibold text-gray-800 dark:text-white">
-              Sakurai Kei
-            </h1>
+            <h1 className="text-xl font-semibold text-gray-800">Sakurai Kei</h1>
 
-            <p className="py-2 text-gray-700 dark:text-gray-400">
-              Aspiring Full-Stack Developer!
-            </p>
+            <p className="py-2 text-gray-700">Aspiring Full-Stack Developer!</p>
 
-            <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
+            <div className="flex items-center mt-4 text-gray-700">
               <svg
                 className="w-6 h-6 fill-current"
                 viewBox="0 0 24 24"
@@ -52,7 +48,7 @@ export default function newFunction() {
               <h1 className="px-2 text-sm">None</h1>
             </div>
 
-            <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
+            <div className="flex items-center mt-4 text-gray-700">
               <svg
                 className="w-6 h-6 fill-current"
                 viewBox="0 0 24 24"
@@ -74,7 +70,7 @@ export default function newFunction() {
               <h1 className="px-2 text-sm">Malaysia</h1>
             </div>
 
-            <div className="flex items-center mt-4 text-gray-700 dark:text-gray-200">
+            <div className="flex items-center mt-4 text-gray-700">
               <svg
                 className="w-6 h-6 fill-current"
                 viewBox="0 0 24 24"
