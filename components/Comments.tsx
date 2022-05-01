@@ -97,7 +97,7 @@ export default function Comments(props: Props) {
         <div className="flex w-full justify-center mb-2">
           No comment posted yet
         </div>
-        {postId && (
+        {postId && user && (
           <div className="flex gap-2 justify-between w-full px-8 py-4 rounded-lg shadow-md bg-gradient-to-b from-blue-300 to-blue-400">
             <form
               method="post"
@@ -170,7 +170,7 @@ export default function Comments(props: Props) {
           </div>
         );
       })}
-      {postId && (
+      {postId && user && (
         <div className="flex gap-2 justify-between w-full px-8 py-4 rounded-lg shadow-md bg-gradient-to-b from-blue-300 to-blue-400">
           <form
             method="post"

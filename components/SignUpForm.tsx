@@ -1,4 +1,5 @@
 import { FormEvent } from "react";
+import Link from "next/link";
 
 interface Errors {
   alreadyExist: boolean;
@@ -20,13 +21,11 @@ export default function SignUpForm(props: SignUpFormProps) {
       </div>
       <span className="justify-center text-sm text-center text-gray-500 flex-items-center">
         Already have an account?
-        <a
-          href="#"
-          target="_blank"
-          className="p-1 text-sm text-blue-500 underline hover:text-blue-700"
-        >
-          Sign in
-        </a>
+        <Link href={"/log-in"}>
+          <a className="p-1 text-sm text-blue-500 underline hover:text-blue-700">
+            Sign in
+          </a>
+        </Link>
       </span>
       {(errors.alreadyExist || errors.error) && (
         <div className="text-red-500 mt-2 text-xl">{errors.error}</div>
