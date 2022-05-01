@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Head from "next/head";
 import { FormEvent, useState } from "react";
 import useSWR from "swr";
 import CreatePostForm from "../../components/CreatePostForm";
@@ -57,7 +58,19 @@ export default function UpdatePost<NextPage>() {
   }
 
   if (!user || !user.isAuthor) {
-    return <div>You do not have the appropriate auth</div>;
+    return (
+      <>
+        {" "}
+        <Head>
+          <title>Not authorized</title>
+          <meta
+            name="description"
+            content="You do not have the appropriate auth"
+          />
+        </Head>
+        <div>You do not have the appropriate auth</div>
+      </>
+    );
   }
 
   if (data && data.post._id !== formData._id) {
@@ -65,7 +78,16 @@ export default function UpdatePost<NextPage>() {
   }
 
   if (!router.query.id) {
-    return <div>No query id provided</div>;
+    return (
+      <>
+        {" "}
+        <Head>
+          <title>No query id</title>
+          <meta name="description" content="No query" />
+        </Head>
+        <div>No query id provided</div>
+      </>
+    );
   }
 
   if (!data) {
@@ -73,10 +95,16 @@ export default function UpdatePost<NextPage>() {
   }
 
   return (
-    <CreatePostForm
-      handleChange={handleChange}
-      handleSubmit={handleSubmit}
-      formData={formData}
-    />
+    <>
+      <Head>
+        <title>Update {data.post.title}</title>
+        <meta name="description" content="About me" />
+      </Head>
+      <CreatePostForm
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        formData={formData}
+      />
+    </>
   );
 }

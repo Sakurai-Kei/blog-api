@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
-import { FormEvent, useEffect, useState } from "react";
+import Head from "next/head";
+import { FormEvent, useState } from "react";
 import LogInForm from "../components/LogInForm";
 import useUser from "../lib/useUser";
 
@@ -53,12 +54,21 @@ export default function LogIn<NextPage>() {
   }
 
   return (
-    <div className="w-full flex justify-center bg-gradient-to-br from-pink-300 to-pink-500">
-      <LogInForm
-        handleSubmit={handleSubmit}
-        handleChange={handleChange}
-        errors={errors}
-      />
-    </div>
+    <>
+      <Head>
+        <title>Log In</title>
+        <meta
+          name="description"
+          content="Log In to access this blog's feature"
+        />
+      </Head>
+      <div className="w-full flex justify-center bg-gradient-to-br from-pink-300 to-pink-500">
+        <LogInForm
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+          errors={errors}
+        />
+      </div>
+    </>
   );
 }

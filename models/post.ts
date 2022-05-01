@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { IComment } from "./comment";
 import { IUser } from "./user";
+import format from "date-fns/format";
 
 export interface IPost {
   title: string;
@@ -9,6 +10,7 @@ export interface IPost {
   authors: IUser;
   comments: IComment;
   _id: mongoose.Schema.Types.ObjectId;
+  dateFormatted: string;
 }
 
 const opts = {
@@ -33,6 +35,10 @@ const postSchema = new mongoose.Schema<IPost>(
 
 postSchema.virtual("url").get(function (this: IPost) {
   return "/posts/" + this._id;
+});
+
+postSchema.virtual("dateFormatted").get(function (this: IPost) {
+  return format(this.date, "PPPP");
 });
 
 const Post = mongoose.models.Post || mongoose.model("Post", postSchema);

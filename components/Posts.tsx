@@ -25,8 +25,7 @@ export default function Posts(props: PostsProp) {
             >
               <div className="flex items-center justify-between">
                 <span className="text-sm font-light text-gray-600 dark:text-gray-400">
-                  {/* @ts-expect-error */}
-                  {post.date}
+                  {post.dateFormatted}
                 </span>
               </div>
 

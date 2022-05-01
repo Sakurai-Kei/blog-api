@@ -1,4 +1,5 @@
 import { FormEvent, useState } from "react";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import useUser from "../lib/useUser";
 import SignUpForm from "../components/SignUpForm";
@@ -73,12 +74,18 @@ export default function SignUp<NextPage>() {
   }
 
   return (
-    <div className="w-full flex justify-center bg-gradient-to-br from-pink-300 to-pink-500">
-      <SignUpForm
-        errors={errors}
-        handleSubmit={handleSubmit}
-        handleChange={handleChange}
-      />
-    </div>
+    <>
+      <Head>
+        <title>Sign Up</title>
+        <meta name="description" content="Make an account with us!" />
+      </Head>
+      <div className="w-full flex justify-center bg-gradient-to-br from-pink-300 to-pink-500">
+        <SignUpForm
+          errors={errors}
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+        />
+      </div>
+    </>
   );
 }

@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Head from "next/head";
 import { FormEvent, useState } from "react";
 import useUser from "../../lib/useUser";
 import CreatePostForm from "../../components/CreatePostForm";
@@ -52,18 +53,33 @@ export default function CreatePost<NextPage>() {
 
   if (!user || !user.isAuthor) {
     return (
-      <div>
-        Verifying user auth status. If the page does not respond, please make
-        sure you are logged in and have correct auth permission
-      </div>
+      <>
+        <Head>
+          <title>Not Authorized</title>
+          <meta
+            name="description"
+            content="You do not have the appropriate auth"
+          />
+        </Head>
+        <div>
+          Verifying user auth status. If the page does not respond, please make
+          sure you are logged in and have correct auth permission
+        </div>
+      </>
     );
   }
 
   return (
-    <CreatePostForm
-      handleChange={handleChange}
-      handleSubmit={handleSubmit}
-      formData={undefined}
-    />
+    <>
+      <Head>
+        <title>Create a Post</title>
+        <meta name="description" content="Create a Post" />
+      </Head>
+      <CreatePostForm
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        formData={undefined}
+      />
+    </>
   );
 }

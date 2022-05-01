@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Head from "next/head";
 import useSWR from "swr";
 import useUser from "../../lib/useUser";
 import { IUser } from "../../models/user";
@@ -53,13 +54,27 @@ export default function User() {
     }
   }
 
-  if (error) return <div>Failed to load user</div>;
+  if (error)
+    return (
+      <>
+        {" "}
+        <Head>
+          <title>No data fetched</title>
+          <meta name="description" content="Data fetch failure" />
+        </Head>
+        <div>Failed to load user</div>
+      </>
+    );
   if (!data) {
     return <div>Loading</div>;
   }
 
   return (
     <>
+      <Head>
+        <title>{data.user.username}&apos;s Profile</title>
+        <meta name="description" content="Profile Page" />
+      </Head>
       {modal && (
         <DeleteAccountModal
           data={data}

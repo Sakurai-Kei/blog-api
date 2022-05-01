@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Head from "next/head";
 import { SyntheticEvent } from "react";
 import useSWR from "swr";
 import Comments from "../../components/Comments";
@@ -46,48 +47,62 @@ export default function Post<NextPage>() {
     setTimeout(() => {
       router.push("/posts");
     }, 3000);
-    return <div>Failed to load post. Redirecting back to posts page</div>;
+    return (
+      <>
+        <Head>
+          <title>No data fetched</title>
+          <meta name="description" content="Data fetch failure" />
+        </Head>
+        <div>Failed to load post. Redirecting back to posts page</div>
+      </>
+    );
   }
   if (!data) {
     return <div>Loading</div>;
   }
 
   return (
-    <div className="w-full flex flex-col gap-4">
-      {user.isAuthor && (
-        <div className="flex justify-end gap-4">
-          <button
-            onClick={deletePost}
-            id={data.post._id.toString()}
-            className="w-fit p-2 rounded-lg shadow-md bg-red-400 hover:bg-red-500 text-white"
-          >
-            Delete Post
-          </button>
-          <Link
-            href={{
-              pathname: `/posts/update`,
-              query: { id: router.query.id },
-            }}
-          >
-            <a className="w-fit p-2 mr-4 rounded-lg shadow-md bg-blue-400 hover:bg-blue-500 text-white">
-              Edit post
-            </a>
-          </Link>
+    <>
+      <Head>
+        <title>{data.post.title}</title>
+        <meta name="description" content="Post Page" />
+      </Head>
+      <div className="w-full flex flex-col gap-4">
+        {user.isAuthor && (
+          <div className="flex justify-end gap-4">
+            <button
+              onClick={deletePost}
+              id={data.post._id.toString()}
+              className="w-fit p-2 rounded-lg shadow-md bg-red-400 hover:bg-red-500 text-white"
+            >
+              Delete Post
+            </button>
+            <Link
+              href={{
+                pathname: `/posts/update`,
+                query: { id: router.query.id },
+              }}
+            >
+              <a className="w-fit p-2 mr-4 rounded-lg shadow-md bg-blue-400 hover:bg-blue-500 text-white">
+                Edit post
+              </a>
+            </Link>
+          </div>
+        )}
+        <div className="w-full flex flex-col gap-4 px-4 py-2 bg-gradient-to-r from-blue-300 to-indigo-300">
+          <div className="flex flex-col gap-4 m-2">
+            <div>{data.post.title}</div>
+            <div>{data.post.dateFormatted}</div>
+            <div>By {data.post.authors.username}</div>
+            <div>{data.post.text}</div>
+          </div>
+          <Comments
+            mutate={mutate}
+            comments={data.commentList as IComment[]}
+            postId={router.query.id as string}
+          />
         </div>
-      )}
-      <div className="w-full flex flex-col gap-4 px-4 py-2 bg-gradient-to-r from-blue-300 to-indigo-300">
-        <div className="flex flex-col gap-4 m-2">
-          <div>{data.post.title}</div>
-          <div>{data.post.date.toString()}</div>
-          <div>By {data.post.authors.username}</div>
-          <div>{data.post.text}</div>
-        </div>
-        <Comments
-          mutate={mutate}
-          comments={data.commentList as IComment[]}
-          postId={router.query.id as string}
-        />
       </div>
-    </div>
+    </>
   );
 }

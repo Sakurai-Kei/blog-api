@@ -162,7 +162,7 @@ export default function Comments(props: Props) {
               <p className="b mt-2 text-gray-600 dark:text-gray-300">
                 {comment.text}
               </p>
-              <p>{comment.date.toString()}</p>
+              <p>{comment.dateFormatted}</p>
             </div>
             <Link href={"/posts/" + comment.posts._id}>
               <a className="flex items-center bg-white rounded-lg shadow-md px-4 py-2 text-blue-600 dark:text-blue-400 hover:underline mt-2">

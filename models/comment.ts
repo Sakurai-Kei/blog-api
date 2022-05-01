@@ -1,6 +1,7 @@
 import { Schema, model, models } from "mongoose";
 import { IPost } from "./post";
 import { IUser } from "./user";
+import format from "date-fns/format";
 
 export interface IComment {
   text: string;
@@ -8,6 +9,7 @@ export interface IComment {
   author: IUser;
   posts: IPost;
   _id: string;
+  dateFormatted: string;
 }
 
 const opts = {
@@ -36,6 +38,10 @@ const commentSchema = new Schema<IComment>(
   },
   opts
 );
+
+commentSchema.virtual("dateFormatted").get(function (this: IComment) {
+  return format(this.date, "Pp");
+});
 
 const Comment = models.Comment || model("Comment", commentSchema);
 
